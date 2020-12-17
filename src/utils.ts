@@ -35,6 +35,19 @@ type BoxMethods<I, R> = {
   fold: (fn: UnaryFunction<I, R>) => R;
 };
 
+/**
+ * Box, apply a function sequentially to the given value.
+ *
+ * @example
+ * Multiply the given value with the specified number
+ * ```
+ * const thirty = Box(5)
+ *   .map(n => n * 2)  // 10
+ *   .map(n => n * 3)  // 30
+ *   .fold(n => n)     // returns value 30
+ * ```
+ *
+ */
 export const Box = <I, R>(value: I): BoxMethods<I, R> => ({
   map: (fn) => Box(fn(value)),
   fold: (fn) => fn(value),
